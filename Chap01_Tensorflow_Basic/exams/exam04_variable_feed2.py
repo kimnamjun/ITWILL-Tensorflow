@@ -31,10 +31,11 @@ X = tf.placeholder(dtype=tf.float32, shape=[None, 3])
 a = tf.Variable(tf.random_normal([3, 1])) 
 b = tf.Variable(tf.random_normal([1, 1]))
 
+expr = tf.add(tf.multiply(X, a), b)
+
 # session object
 with tf.Session() as sess :
-    pass
-
-
-
-
+    init = tf.global_variables_initializer()
+    sess.run(init)
+    print(sess.run(X, feed_dict={X: [[1, 2, 3]]}))
+    print(sess.run(expr, feed_dict={X: [[1, 2, 3]]}))

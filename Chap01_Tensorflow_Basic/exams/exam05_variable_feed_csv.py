@@ -19,12 +19,28 @@ import pandas as pd
 import tensorflow.compat.v1 as tf # ver 1.x
 tf.disable_v2_behavior() # ver 2.x 사용안함 
 
-bmi = pd.read_csv("c:/itwill/6_Tensorflow/data/bmi.csv")
+bmi = pd.read_csv('C:/ITWILL/6_Tensorflow/data/bmi.csv')
 print(bmi.info())
 
 # x,y 공급 data 
 x_data = bmi[['height', 'weight']] # 복수 칼럼 선택 
-y_data = bmi['label'] # 단일 칼럼 선택 
+y_data = bmi['label'] # 단일 칼럼 선택
 
+X = tf.placeholder(dtype=tf.int32, shape=[None, 2])
+Y = tf.placeholder(dtype=tf.string, shape=[None])
 
+with tf.Session() as sess:
+    feed_data = {X: x_data, Y: y_data}
+    X_val, Y_val = sess.run([X, Y], feed_dict=feed_data)
+
+    # 키와 몸무게 평균
+    print(type(X_val))
+    print(X_val.shape)
+    print('키 평균 :', X_val[:, 0].mean())
+    print('몸무게 평균 :', X_val[:, 1].mean())
+
+    # 빈도수
+    print('label 빈도수 :')
+    Y_ser = pd.Series(Y_val)
+    print(Y_ser.value_counts())
 

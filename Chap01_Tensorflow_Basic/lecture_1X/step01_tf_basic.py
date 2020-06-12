@@ -3,10 +3,12 @@ python code vs tensorflow code
 """
 
 # python : 직접 실행 환경
+'''
 x = 10
 y = 20
 z = x + y
 print(z)
+'''
 
 # import tensorflow as tf : ver 2.0
 import tensorflow.compat.v1 as tf  # ver 1.x : migration
