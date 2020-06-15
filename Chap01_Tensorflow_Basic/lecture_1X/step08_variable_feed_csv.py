@@ -2,9 +2,9 @@
 csv(pandas object) -> tensorflow variable
 """
 import pandas as pd
+from sklearn.model_selection import train_test_split
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
-from sklearn.model_selection import train_test_split
 
 iris = pd.read_csv('C:/ITWILL/6_Tensorflow/data/iris.csv')
 iris.info()

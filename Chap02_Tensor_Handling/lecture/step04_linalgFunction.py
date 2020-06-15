@@ -26,3 +26,45 @@ print(dia)
 print(mat_deter)
 print(mat_inver)
 print(mat)
+
+# 단위행렬 -> ont-hot encoding
+a = [0, 1, 2]
+encoding = np.eye(len(a))[a]
+print(encoding)
+
+# tf.multiply vs tf.matmul
+'''
+tf.multiply : 브로드 캐스트
+    - X * a -> input(1)
+tf.matmul : 행렬곱
+    - X1 * a1 + X2 * a2 -> input(n)
+'''
+
+'''
+기상 0530
+출발 0540
+강남역 0740
+디엠시 0900
+
+디엠시 1800
+강남역 1910
+집 2100
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
