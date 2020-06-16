@@ -11,7 +11,7 @@ tf.disable_v2_behavior() # ver 2.x 사용안함
 import pandas as pd
 from sklearn.metrics import mean_squared_error
 
-women = pd.read_csv('D:/ITWILL/6_Tensorflow/data/women.csv')
+women = pd.read_csv('C:/ITWILL/6_Tensorflow/data/women.csv')
 print(women.info())
 print(women)
 
@@ -35,18 +35,18 @@ a = tf.Variable(tf.random_uniform([1], 0.1, 1.0))
 b = tf.Variable(tf.random_uniform([1], 0.1, 1.0))
 
 # 4. model 생성 : y_pred, err, cost 식 작성 
- 
+y_pred = tf.add(tf.multiply(X, a), b)
+err = tf.subtract(Y, y_pred)
+cost = tf.reduce_mean(tf.square(err))
 
-# 5. Session object 생성 : 반복 학습 
+optimizer = tf.train.GradientDescentOptimizer(0.1)  # 학습률=0.1
+train = optimizer.minimize(cost)  # 손실 최소화 : 최적의 기울기, 절편 수정
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-    
+# 5. Session object 생성 : 반복 학습
+with tf.Session() as sess:
+    init = tf.global_variables_initializer()
+    sess.run(init)
+    for step in range(100):
+        _, loss_val = sess.run([train, cost], feed_dict={X: x_data, Y: y_data})
+        a_val, b_val = sess.run([a, b])
+        print(f'step = {step + 1}, loss = {loss_val}, a = {a_val}, b = {b_val}')

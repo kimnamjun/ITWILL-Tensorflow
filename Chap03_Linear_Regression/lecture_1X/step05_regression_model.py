@@ -8,9 +8,20 @@ import numpy as np
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
+"""
 # X, Y data 정의
 x_data = np.array([1,2,3])  # 입력 data
 y_data = np.array([2,4,6])  # 출력 data
+"""
+
+# X변수 값이 큰 경우 : inf
+x_data = np.array([1,2,3,125])  # 입력 data
+y_data = np.array([2,4,6,250])  # 출력 data
+
+# 0 ~ 1
+x_data = x_data / 125  # [0.008, 0.016, 0.024, 1.   ]
+# np.log
+y_data = np.log(y_data)  # [0.69314718 1.38629436 1.79175947 5.52146092]
 
 # X, Y 변수 정의
 X = tf.placeholder(dtype=tf.float32, shape=[None])  # x_data 공급
@@ -44,3 +55,6 @@ with tf.Session() as sess:
         _, loss_val = sess.run([train, loss], feed_dict=feed_data)
         a_val, b_val = sess.run([a, b])
         print(f'step = {step+1}, loss = {loss_val}, a = {a_val}, b = {b_val}')
+
+    # model test
+    print(sess.run(model, feed_dict={X: [0.24]}))
