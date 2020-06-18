@@ -75,7 +75,7 @@ with tf.Session() as sess:
             # mini data 공급             
             feed_data = {X: x_train[start:end], Y: y_train[start:end]}
             _, cost_val = sess.run([train, cost], feed_dict = feed_data)
-        '''         
+        '''
         # 1step 학습 후 cost 출력 
         print('step=', step+1, ' cost val=', cost_val)
     

@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
 """
-step01_gradientTape.py
-
-1. 미분(gradient)계수 자동 계산   
+1. 미분(gradient)계수 자동 계산
 - u자 곡선에서 접선의 기울기
 - tf.GradientTape : 미분계수 자동 계산 클래스
 
