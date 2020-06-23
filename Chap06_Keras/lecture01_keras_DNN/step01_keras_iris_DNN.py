@@ -1,6 +1,12 @@
 '''
     - Tensorflow 2.x Keras + iris
     - Keras : Model 생성을 위한 고수준 API
+    - 1) Y변수 : ont hot encoding
+        loss='categorical_crossentropy'
+        metrics=['accuracy']
+    - 2) Y변수 : integer(10진수)
+        loss='sparse_categorical_crossentropy'
+        metrics=['sparse_categorical_accuracy']
 '''
 
 import tensorflow as tf
@@ -23,7 +29,7 @@ X_data.shape  # (150, 4)
 y_data = iris.target
 y_data = y_data.reshape(-1, 1)
 
-y_data = to_categorical(y_data)
+# y_data = to_categorical(y_data)
 y_data.shape  # (150, 3)
 
 x_train, x_val, y_train, y_val = train_test_split(x_data, y_data)
@@ -44,7 +50,12 @@ model.add(Dense( node 수 , activation = 'relu' / 'softmax' / 'sigmoid'))
 '''
 
 # 4. model compile
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+# model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['sparse_categorical_accuracy'])
+# class로 변경
+from tensorflow.keras import optimizers, losses, metrics
+# model.compile(optimizer=optimizers.Adam(), loss=losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['sparse_categorical_accuracy'])
+model.compile(optimizer=optimizers.Adam(), loss=losses.SparseCategoricalCrossentropy(from_logits=True), metrics=[metrics.SparseCategoricalAccuracy()])
+# y_true : integer vs y_pred : 확률(from_logit=True)
 
 # layer check
 model.summary()
